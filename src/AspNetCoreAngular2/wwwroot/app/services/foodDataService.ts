@@ -17,8 +17,7 @@ export class DataService {
             'foodItems/';
 
         this.headers = new Headers();
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Accept', 'application/json');
+        
     }
 
     public GetAllFood = (): Observable<FoodItem[]> => {
