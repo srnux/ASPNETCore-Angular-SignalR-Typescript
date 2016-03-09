@@ -5,7 +5,4 @@ import {Component} from 'angular2/core';
     templateUrl: 'app/components/about/about.component.html',
 })
 
-export class AboutComponent {
-
-
-}
+export class AboutComponent { }

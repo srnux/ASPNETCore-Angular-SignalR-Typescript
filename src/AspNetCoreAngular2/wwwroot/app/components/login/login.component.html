@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-cutlery fa-fw"></i> Login
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body">
+        <!-- /.list-group -->
+        <form (ngSubmit)="login()">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" [(ngModel)]="userData.Username" class="form-control" placeholder="dont@ask.me">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Password</label>
+                <input type="text" [(ngModel)]="userData.Password" class="form-control" placeholder="superSecret123">
+            </div>
+            <input class="btn btn-success" type="submit" value="Login" [disabled]="(userData.Username === '' || userData.Password === '')">
+        </form>
+    </div>
+    <!-- /.panel-body -->
+</div>

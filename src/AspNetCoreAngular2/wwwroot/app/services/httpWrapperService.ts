@@ -1,62 +1,60 @@
-import {Injectable} from 'angular2/core';
-import {Http, RequestOptionsArgs, Response, Headers} from 'angular2/http';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from 'angular2/core';
+import { Http, RequestOptionsArgs, Response, Headers } from 'angular2/http';
+import { Observable } from 'rxjs/Observable';
 import { CONFIGURATION } from '../shared/app.constants';
+import { TokenService } from '../services/TokenService';
 
 @Injectable()
 export class HttpWrapperService {
-    constructor(private _http: Http) {
+    constructor(private _http: Http, private _tokenService: TokenService) {
 
     }
 
-    public Get = (url: string, options?: RequestOptionsArgs): Observable<Response> => {
-        
+    public get = (url: string, options?: RequestOptionsArgs): Observable<Response> => {
         options = this.prepareOptions(options);
 
         return this._http.get(url, options)
-            .map((response: Response) => <Response>response.json())
+            .catch(this.handleError);
+    };
+
+    public post = (url: string, body: string, options?: RequestOptionsArgs): Observable<Response> => {
+        options = this.prepareOptions(options);
+        return this._http.post(url, body, options)
+            .catch(this.handleError);
+    };
+
+    public put = (url: string, body: string, options?: RequestOptionsArgs): Observable<Response> => {
+        options = this.prepareOptions(options);
+        return this._http.put(url, body, options)
             .catch(this.handleError);
     }
-    
-/*    post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-        url = this.buildUrl(url);
+
+    public delete = (url: string, options?: RequestOptionsArgs): Observable<Response> => {
         options = this.prepareOptions(options);
-        return this._http.post(url, body, options);
+        return this._http.delete(url, options)
+            .catch(this.handleError);
     }
 
-    put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-        url = this.buildUrl(url);
+    public patch = (url: string, body: string, options?: RequestOptionsArgs): Observable<Response> => {
         options = this.prepareOptions(options);
-        return this._http.put(url, body, options);
+        return this._http.patch(url, body, options)
+            .catch(this.handleError);
     }
 
-    delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        url = this.buildUrl(url);
-        options = this.prepareOptions(options);
-        return this._http.delete(url, options);
-    }
-
-    patch(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-        url = this.buildUrl(url);
-        options = this.prepareOptions(options);
-        return this._http.patch(url, body, options);
-    }*/
-    
-    
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json().error || 'Server error');
     }
 
     private prepareOptions(options: RequestOptionsArgs): RequestOptionsArgs {
-        //var token = this._tokenService.token;
-        var token = "TOKEN HERE";
+        let token = this._tokenService.getToken();
+
         options = options || {};
 
         if (!options.headers) {
             options.headers = new Headers();
         }
-        
+
         if (token) {
             options.headers.append('Authorization', 'Bearer ' + token);
         }

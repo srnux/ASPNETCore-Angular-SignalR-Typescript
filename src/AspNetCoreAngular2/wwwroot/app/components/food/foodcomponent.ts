@@ -21,12 +21,12 @@ export class FoodComponent implements OnInit {
         this.currentFoodItem = new FoodItem();
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.subscribeToEvents();
     }
 
-    public saveFood() {
-        if(this.currentFoodItem.Id){
+    public saveFood(): void {
+        if (this.currentFoodItem.Id) {
             this._dataService
                 .Update(this.currentFoodItem.Id, this.currentFoodItem)
                 .subscribe(data => {
@@ -50,16 +50,16 @@ export class FoodComponent implements OnInit {
     public deleteFoodItem(foodItem: FoodItem) {
         this._dataService.DeleteFood(foodItem.Id)
             .subscribe(
-                response => {
-                    // this._signalRService.FoodDeleted();
-                }, error => {
-                    console.log(error);
-                }, () => {
-                    console.log('Deleted complete');
-                });
+            response => {
+                // this._signalRService.FoodDeleted();
+            }, error => {
+                console.log(error);
+            }, () => {
+                console.log('Deleted complete');
+            });
     }
 
-    public setFoodItemToEdit(foodItem: FoodItem){
+    public setFoodItemToEdit(foodItem: FoodItem) {
         this.currentFoodItem = foodItem;
     }
 
@@ -67,18 +67,18 @@ export class FoodComponent implements OnInit {
         this._dataService
             .GetAllFood()
             .subscribe(data => this.foodItems = data,
-                error => console.log(error),
-                () => console.log('Get all Foods complete ' + this.foodItems ));
+            error => console.log(error),
+            () => console.log('Get all Foods complete ' + this.foodItems));
     }
 
-    private subscribeToEvents():void{
+    private subscribeToEvents(): void {
         this._signalRService.connectionEstablished.subscribe(() => {
             this.canAddFood = true;
             this.getAllFood();
         });
 
         this._signalRService.foodchanged.subscribe(() => {
-             this.getAllFood();
+            this.getAllFood();
         });
     }
 }

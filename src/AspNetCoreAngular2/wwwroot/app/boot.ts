@@ -4,11 +4,15 @@ import { APP_BASE_HREF, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy
 import { HTTP_PROVIDERS } from 'angular2/http';
 import { AppComponent } from './app.component';
 import { SignalRService } from './services/signalRService';
+import { HttpWrapperService } from './services/HttpWrapperService';
+import { TokenService } from './services/TokenService';
 
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     SignalRService,
+    HttpWrapperService,
+    TokenService,
     // provide(LocationStrategy, {useClass: HashLocationStrategy})
     bind(LocationStrategy).toClass(HashLocationStrategy),
     provide(APP_BASE_HREF, {useValue: '/'})
