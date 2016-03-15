@@ -3,9 +3,11 @@ using AspNetCoreAngular2.Repositories;
 using AspNetCoreAngular2.Services;
 using AspNetCoreAngular2.ViewModels;
 using AutoMapper;
+using Microsoft.AspNet.Authentication.JwtBearer;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Cors.Infrastructure;
 using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -68,7 +70,6 @@ namespace AspNetCoreAngular2
             app.UseIISPlatformHandler();
 
             app.UseDefaultFiles();
-
             app.UseStaticFiles();
 
             app.UseMvc();

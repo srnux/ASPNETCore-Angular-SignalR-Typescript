@@ -18,6 +18,7 @@ gulp.task('build:apps', function(done) {
         'cordova-copy-vendor-js-to-wwwroot',
         'cordova-copy-files-to-temp-www',
         'cordova-copy-fonts-to-temp-www',
+        'cordova-add-plugins',
         'cordova-build-windows',
         'cordova-build-android',
         'cordova-copy-to-dist',
@@ -33,10 +34,10 @@ gulp.task('cordova-copy-vendor-js-to-wwwroot', function() {
 });
 
 gulp.task('cordova-copy-config-to-temp', function() {
-    var configFIle = path.join(buildConfig.assets.cordova, "config.xml");
+    var configFile = path.join(buildConfig.assets.cordova, "config.xml");
 
     return gulp.src([
-        configFIle
+        configFile
     ])
         .pipe(gulp.dest(buildConfig.temp.cordova));
 });
@@ -62,6 +63,14 @@ gulp.task('cordova-copy-fonts-to-temp-www', function(done) {
     ]).pipe(gulp.dest(targetPath));
 });
 
+gulp.task('cordova-add-plugins', function (done) {
+    sh.cd(buildConfig.temp.cordova);
+    sh.exec('cordova plugin add https://github.com/apache/cordova-plugin-splashscreen.git');
+    sh.exec('cordova plugin add org.apache.cordova.camera');
+    sh.cd('../..');
+    done();
+});
+
 gulp.task('cordova-build-windows', function(done) {
     sh.cd(buildConfig.temp.cordova);
     sh.exec('cordova platform add windows');
@@ -79,6 +88,6 @@ gulp.task('cordova-build-android', function(done) {
 });
 
 gulp.task('cordova-copy-to-dist', function() {
-    var sourceFolder = path.join(buildConfig.temp.cordova, 'platforms', "**/*");
+    var sourceFolder = path.join(buildConfig.temp.cordova, 'platforms', "**", '*.*');
     return common.copyToDist(sourceFolder);
 });
