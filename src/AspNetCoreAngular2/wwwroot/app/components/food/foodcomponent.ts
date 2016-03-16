@@ -3,6 +3,7 @@ import { CORE_DIRECTIVES } from 'angular2/common';
 import { DataService } from '../../services/foodDataService';
 import { SignalRService } from '../../services/signalRService';
 import { FoodItem } from '../../models/FoodItem';
+import { NeedsAuthentication } from '../../decorators/NeedsAuthentication';
 
 @Component({
     selector: 'food-component',
@@ -11,6 +12,7 @@ import { FoodItem } from '../../models/FoodItem';
     directives: [CORE_DIRECTIVES]
 })
 
+@NeedsAuthentication()
 export class FoodComponent implements OnInit {
     public foodItems: FoodItem[];
     public currentFoodItem: FoodItem;

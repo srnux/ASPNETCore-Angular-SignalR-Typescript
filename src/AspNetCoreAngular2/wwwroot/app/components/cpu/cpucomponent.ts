@@ -1,6 +1,7 @@
 import { Component, OnInit } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { SignalRService } from '../../services/signalRService';
+import { NeedsAuthentication } from '../../decorators/NeedsAuthentication';
 
 @Component({
     selector: 'cpu-component',
@@ -8,6 +9,7 @@ import { SignalRService } from '../../services/signalRService';
     directives: [CORE_DIRECTIVES]
 })
 
+@NeedsAuthentication()
 export class CpuComponent implements OnInit {
     public cpuValue: number;
 

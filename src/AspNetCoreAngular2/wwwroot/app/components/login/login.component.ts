@@ -1,33 +1,36 @@
 import { Component, OnInit } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
-import { TokenService } from '../../services/TokenService';
 import { HttpWrapperService } from '../../services/HttpWrapperService';
+import { SecurityService } from '../../services/securityService';
 import { CONFIGURATION } from '../../shared/app.constants';
 
-export interface IUserData {
+export class UserData {
     Username: string;
     Password: string;
 }
 
 @Component({
     selector: 'login-component',
-    providers: [TokenService, HttpWrapperService],
+    providers: [SecurityService, HttpWrapperService],
     templateUrl: 'app/components/login/login.component.html',
     directives: [CORE_DIRECTIVES]
 })
 
-export class FoodComponent {
+export class LoginComponent {
 
-    public userData: IUserData;
+    public userData: UserData;
     private actionUrl: string;
 
-    constructor(private _dataService: HttpWrapperService) {
+    constructor(private _dataService: HttpWrapperService, private _securityService: SecurityService) {
         this.actionUrl = CONFIGURATION.baseUrls.server +
             CONFIGURATION.baseUrls.apiUrl +
             'login/';
+            
+            this.userData = new UserData();
     }
 
     public login(): void {
-        this._dataService.post(this.actionUrl, '');
+        console.log("Do login logic");
+        this._securityService.Authorize(); 
     }
 }

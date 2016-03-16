@@ -3,6 +3,7 @@ import { CORE_DIRECTIVES } from 'angular2/common';
 import { FoodComponent } from '../food/foodcomponent';
 import { ChatComponent } from '../chat/chatComponent';
 import { CpuComponent } from '../cpu/cpuComponent';
+import { NeedsAuthentication } from '../../decorators/NeedsAuthentication';
 
 @Component({
     selector: 'dashboard',
@@ -10,6 +11,7 @@ import { CpuComponent } from '../cpu/cpuComponent';
     directives: [CORE_DIRECTIVES, FoodComponent, ChatComponent, CpuComponent]
 })
 
+@NeedsAuthentication()
 export class DashboardComponent {
 
     public message: string;

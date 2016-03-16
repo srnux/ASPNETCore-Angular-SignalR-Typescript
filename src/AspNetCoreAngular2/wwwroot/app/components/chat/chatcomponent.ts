@@ -2,6 +2,7 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { SignalRService } from '../../services/signalRService';
 import { ChatMessage } from '../../models/ChatMessage';
+import { NeedsAuthentication } from '../../decorators/NeedsAuthentication';
 
 @Component({
     selector: 'chat-component',
@@ -9,7 +10,7 @@ import { ChatMessage } from '../../models/ChatMessage';
     directives: [CORE_DIRECTIVES],
 })
 
-
+@NeedsAuthentication()
 export class ChatComponent {
 
     public currentMessage: ChatMessage;
