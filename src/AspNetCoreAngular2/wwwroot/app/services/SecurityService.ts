@@ -1,9 +1,9 @@
 ﻿import { Injectable } from 'angular2/core';
 import { Http, Response, Headers } from 'angular2/http';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { CONFIGURATION } from '../shared/app.constants';
-import {Router} from 'angular2/router';
+import { Router } from 'angular2/router';
 
 @Injectable()
 export class SecurityService {
@@ -22,9 +22,9 @@ export class SecurityService {
         this.headers.append('Accept', 'application/json');
         this.storage = localStorage;
 
-        if (this.retrieve("IsAuthorized") !== "") {
-            this.HasAdminRole = this.retrieve("HasAdminRole");
-            this.IsAuthorized = this.retrieve("IsAuthorized");
+        if (this.retrieve('IsAuthorized') !== '') {
+            this.HasAdminRole = this.retrieve('HasAdminRole');
+            this.IsAuthorized = this.retrieve('IsAuthorized');
         }
     }
 
@@ -32,34 +32,34 @@ export class SecurityService {
     public HasAdminRole: boolean;
 
     public GetToken(): any {
-        return this.retrieve("authorizationData");
+        return this.retrieve('authorizationData');
     }
 
     public ResetAuthorizationData() {
-        this.store("authorizationData", "");
-        this.store("authorizationDataIdToken", "");
+        this.store('authorizationData', '');
+        this.store('authorizationDataIdToken', '');
 
         this.IsAuthorized = false;
         this.HasAdminRole = false;
-        this.store("HasAdminRole", false);
-        this.store("IsAuthorized", false);
+        this.store('HasAdminRole', false);
+        this.store('IsAuthorized', false);
     }
 
     public SetAuthorizationData(token: any, id_token: any) {
-        if (this.retrieve("authorizationData") !== "") {
-            this.store("authorizationData", "");
+        if (this.retrieve('authorizationData') !== '') {
+            this.store('authorizationData', '');
         }
 
-        this.store("authorizationData", token);
-        this.store("authorizationDataIdToken", id_token);
+        this.store('authorizationData', token);
+        this.store('authorizationDataIdToken', id_token);
         this.IsAuthorized = true;
-        this.store("IsAuthorized", true);
+        this.store('IsAuthorized', true);
 
         var data: any = this.getDataFromToken(token);
         for (var i = 0; i < data.role.length; i++) {
-            if (data.role[i] === "dataEventRecords.admin") {
+            if (data.role[i] === 'dataEventRecords.admin') {
                 this.HasAdminRole = true;
-                this.store("HasAdminRole", true)
+                this.store('HasAdminRole', true)
             }
         }
     }
@@ -67,34 +67,34 @@ export class SecurityService {
     public Authorize() {
         this.ResetAuthorizationData();
 
-        console.log("BEGIN Authorize, no auth data");
+        console.log('BEGIN Authorize, no auth data');
 
-        var authorizationUrl = 'https://localhost:14816/connect/authorize';
+        var authorizationUrl = 'https://localhost:44322/connect/authorize';
         var client_id = 'angular2client';
-        var redirect_uri = 'https://localhost:5000';
-        var response_type = "id_token token";
-        var scope = "dataEventRecords securedFiles openid";
-        var nonce = "N" + Math.random() + "" + Date.now();
-        var state = Date.now() + "" + Math.random();
+        var redirect_uri = CONFIGURATION.baseUrls.server;
+        var response_type = 'id_token token';
+        var scope = 'dataEventRecords securedFiles openid';
+        var nonce = 'N' + Math.random() + '' + Date.now();
+        let state = Date.now() + '' + Math.random();
 
-        this.store("authStateControl", state);
-        this.store("authNonce", nonce);
-        console.log("AuthorizedController created. adding myautostate: " + this.retrieve("authStateControl"));
+        this.store('authStateControl', state);
+        this.store('authNonce', nonce);
+        console.log('AuthorizedController created. adding myautostate: ' + this.retrieve('authStateControl'));
 
-        var url =
-            authorizationUrl + "?" +
-            "response_type=" + encodeURI(response_type) + "&" +
-            "client_id=" + encodeURI(client_id) + "&" +
-            "redirect_uri=" + encodeURI(redirect_uri) + "&" +
-            "scope=" + encodeURI(scope) + "&" +
-            "nonce=" + encodeURI(nonce) + "&" +
-            "state=" + encodeURI(state);
+        var url:string =
+            authorizationUrl + '?' +
+            'response_type=' + encodeURI(response_type) + '&' +
+            'client_id=' + encodeURI(client_id) + '&' +
+            'redirect_uri=' + encodeURI(redirect_uri) + '&' +
+            'scope=' + encodeURI(scope) + '&' +
+            'nonce=' + encodeURI(nonce) + '&' +
+            'state=' + encodeURI(state);
 
         window.location.href = url;
     }
 
     public AuthorizedCallback() {
-        console.log("BEGIN AuthorizedCallback, no auth data");
+        console.log('BEGIN AuthorizedCallback, no auth data');
         this.ResetAuthorizationData();
 
         var hash = window.location.hash.substr(1);
@@ -106,15 +106,15 @@ export class SecurityService {
         }, {});
 
         console.log(result);
-        console.log("AuthorizedCallback created, begin token validation");
+        console.log('AuthorizedCallback created, begin token validation');
 
-        var token = "";
-        var id_token = "";
+        var token = '';
+        var id_token = '';
         var authResponseIsValid = false;
         if (!result.error) {
 
-            if (result.state !== this.retrieve("authStateControl")) {
-                console.log("AuthorizedCallback incorrect state");
+            if (result.state !== this.retrieve('authStateControl')) {
+                console.log('AuthorizedCallback incorrect state');
             } else {
 
                 token = result.access_token;
@@ -124,21 +124,21 @@ export class SecurityService {
                 console.log(dataIdToken);
 
                 // validate nonce
-                if (dataIdToken.nonce !== this.retrieve("authNonce")) {
-                    console.log("AuthorizedCallback incorrect nonce");
+                if (dataIdToken.nonce !== this.retrieve('authNonce')) {
+                    console.log('AuthorizedCallback incorrect nonce');
                 } else {
-                    this.store("authNonce", "");
-                    this.store("authStateControl", "");
+                    this.store('authNonce', '');
+                    this.store('authStateControl', '');
 
                     authResponseIsValid = true;
-                    console.log("AuthorizedCallback state and nonce validated, returning access token");
+                    console.log('AuthorizedCallback state and nonce validated, returning access token');
                 }
             }
         }
 
         if (authResponseIsValid) {
             this.SetAuthorizationData(token, id_token);
-            console.log(this.retrieve("authorizationData"));
+            console.log(this.retrieve('authorizationData'));
 
             this._router.navigate(['Overviewindex']);
         }

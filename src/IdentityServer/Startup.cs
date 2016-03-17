@@ -45,8 +45,8 @@ namespace IdentityServer
                 {
                     EnableSignOutPrompt = false
                 };
-
             });
+
             builder.Services.AddLogging();
             builder.AddInMemoryClients(Clients.Get());
             builder.AddInMemoryScopes(Scopes.Get());

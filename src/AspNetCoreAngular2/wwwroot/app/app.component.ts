@@ -12,7 +12,7 @@ import {LoginComponent} from './components/login/login.component';
 })
 
 @RouteConfig([
-     { path: '/login', name: 'Login', component: LoginComponent },
+    { path: '/login', name: 'Login', component: LoginComponent },
     { path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: true },
     { path: '/about', name: 'About', component: AboutComponent },
 ])

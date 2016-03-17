@@ -25,12 +25,11 @@ export class LoginComponent {
         this.actionUrl = CONFIGURATION.baseUrls.server +
             CONFIGURATION.baseUrls.apiUrl +
             'login/';
-            
             this.userData = new UserData();
     }
 
     public login(): void {
         console.log("Do login logic");
-        this._securityService.Authorize(); 
+        this._securityService.Authorize();
     }
 }

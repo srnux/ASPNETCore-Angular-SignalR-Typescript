@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { SignalRService } from './services/signalRService';
 import { HttpWrapperService } from './services/HttpWrapperService';
 import { TokenService } from './services/TokenService';
-import {appInjector} from './shared/app.injector';
+import { SecurityService } from './services/SecurityService';
+import { appInjector } from './shared/app.injector';
 
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     SignalRService,
     HttpWrapperService,
+    SecurityService,
     TokenService,
     // provide(LocationStrategy, {useClass: HashLocationStrategy})
     bind(LocationStrategy).toClass(HashLocationStrategy),
