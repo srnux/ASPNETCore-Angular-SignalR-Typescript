@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { CONFIGURATION } from '../shared/app.constants';
 import { Router } from 'angular2/router';
+import {TokenService} from '../services/TokenService';
 
 @Injectable()
 export class SecurityService {
@@ -12,7 +13,7 @@ export class SecurityService {
     private headers: Headers;
     private storage: any;
 
-    constructor(private _http: Http, private _router: Router) {
+    constructor(private _http: Http, private _router: Router, private _tokenService: TokenService) {
 
         this.actionUrl = CONFIGURATION.baseUrls.server +
             CONFIGURATION.baseUrls.apiUrl + 'DataEventRecords/';
@@ -51,6 +52,7 @@ export class SecurityService {
         }
 
         this.store('authorizationData', token);
+        this._tokenService.setToken(token);
         this.store('authorizationDataIdToken', id_token);
         this.IsAuthorized = true;
         this.store('IsAuthorized', true);
@@ -140,9 +142,8 @@ export class SecurityService {
             this.SetAuthorizationData(token, id_token);
             console.log(this.retrieve('authorizationData'));
 
-            this._router.navigate(['Overviewindex']);
-        }
-        else {
+            this._router.navigate(['Dashboard']);
+        } else {
             this.ResetAuthorizationData();
             this._router.navigate(['Unauthorized']);
         }

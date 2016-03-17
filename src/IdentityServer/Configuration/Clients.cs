@@ -16,11 +16,11 @@ namespace IdentityServer.Configuration
                     Flow = Flows.Implicit,
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:5000/authorized"
+                        "http://localhost:5000/authorized"
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "https://localhost:44347/unauthorized.html"
+                        "httts://localhost:44347/unauthorized.html"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
@@ -44,17 +44,17 @@ namespace IdentityServer.Configuration
                     Flow = Flows.Implicit,
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:5000"
+                        "http://localhost:5000/"
 
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "https://localhost:5000/Unauthorized.html"
+                        "http://localhost:5000/Unauthorized.html"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        "https://localhost:5000",
-                        "http://localhost:5000"
+                        "https://localhost:5000/",
+                        "http://localhost:5000/"
                     },
                     AllowedScopes = new List<string>
                     {
