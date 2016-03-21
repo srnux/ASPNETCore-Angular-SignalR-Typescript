@@ -1,9 +1,9 @@
-﻿import {Component, OnInit} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {AboutComponent} from './components/about/about.component';
-import {LoginComponent} from './components/login/login.component';
-import {SecurityService} from './services/SecurityService';
+﻿import { Component, OnInit } from 'angular2/core';
+import { RouteConfig, ROUTER_DIRECTIVES } from 'angular2/router';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AboutComponent } from './components/about/about.component';
+import { LoginComponent } from './components/login/login.component';
+import { SecurityService } from './services/security.service';
 
 @Component({
     selector: 'my-app',
@@ -16,6 +16,7 @@ import {SecurityService} from './services/SecurityService';
     { path: '/login', name: 'Login', component: LoginComponent },
     { path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: true },
     { path: '/about', name: 'About', component: AboutComponent },
+    { path: '/unauthorized', name: 'Unauthorized', component: AboutComponent },
 ])
 
 

@@ -1,8 +1,8 @@
-import {CanActivate, ComponentInstruction, Router} from 'angular2/router';
-import {Injector} from 'angular2/core';
-import {appInjector} from '../shared/app.injector';
-import {TokenService} from '../services/TokenService';
-import {SecurityService} from '../services/SecurityService';
+import { CanActivate, ComponentInstruction, Router } from 'angular2/router';
+import { Injector } from 'angular2/core';
+import { appInjector } from '../shared/app.injector';
+import { TokenService } from '../services/token.service';
+import { SecurityService } from '../services/security.service';
 
 export const NeedsAuthentication = () => {
     return CanActivate((to: ComponentInstruction, from: ComponentInstruction, target = ['/']) => {
@@ -11,13 +11,13 @@ export const NeedsAuthentication = () => {
         let securityService: SecurityService = injector.get(SecurityService);
         let router: Router = injector.get(Router);
 
-        if (tokenService.getToken()) {
+        if (tokenService.isAuthenticated()) {
             return true;
         }
 
         //router.navigate(['/Login', { target }]);
 
-        console.log('Do login logic');
+        //console.log('Do login logic');
         securityService.Authorize();
 
         return false;

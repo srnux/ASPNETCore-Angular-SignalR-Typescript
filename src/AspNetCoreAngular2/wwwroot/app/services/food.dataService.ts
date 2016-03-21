@@ -3,7 +3,7 @@ import { Response } from 'angular2/http';
 import { Observable } from 'rxjs/Rx';
 import { FoodItem } from '../models/FoodItem';
 import { CONFIGURATION } from '../shared/app.constants';
-import { HttpWrapperService } from './HttpWrapperService';
+import { HttpWrapperService } from './httpWrapper.service';
 
 @Injectable()
 export class DataService {

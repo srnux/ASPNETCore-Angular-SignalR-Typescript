@@ -18,45 +18,17 @@ namespace IdentityServer.Configuration
                 // contain roles of user
                 new Scope
                 {
-                    Name = "dataEventRecords",
-                    DisplayName = "Scope for the data event records resource.",
+                    Name = "angular2Demo",
+                    DisplayName = "Scope for the angular2Demo.",
                     Type = ScopeType.Resource,
                     ScopeSecrets = new List<Secret>
                     {
-                        new Secret("dataEventRecordsSecret".Sha256())
+                        new Secret("angular2Demo".Sha256())
                     },
                     Claims = new List<ScopeClaim>
                     {
                         new ScopeClaim("role"),
-                        new ScopeClaim("dataEventRecords")
-                    }
-                },
-                new Scope
-                {
-                    Name = "aReallyCoolScope",
-                    DisplayName = "A really cool scope",
-                    Type = ScopeType.Resource,
-
-                    Claims = new List<ScopeClaim>
-                    {
-                        new ScopeClaim("role"),
-                        new ScopeClaim("aReallyCoolScope")
-                    }
-                },
-                new Scope
-                {
-                    Name = "securedFiles",
-                    DisplayName = "Scope for the secured files resource.",
-                    Type = ScopeType.Resource,
-
-                    ScopeSecrets = new List<Secret>
-                    {
-                        new Secret("securedFilesSecret".Sha256())
-                    },
-                    Claims = new List<ScopeClaim>
-                    {
-                        new ScopeClaim("role"),
-                        new ScopeClaim("securedFiles")
+                        new ScopeClaim("angular2Demo")
                     }
                 }
             };

@@ -12,6 +12,7 @@ using Microsoft.AspNet.SignalR.Infrastructure;
 
 namespace AspNetCoreAngular2.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class FoodItemsController : Controller
     {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
-import { HttpWrapperService } from '../../services/HttpWrapperService';
-import { SecurityService } from '../../services/securityService';
+import { HttpWrapperService } from '../../services/httpWrapper.service';
+import { SecurityService } from '../../services/security.service';
 import { CONFIGURATION } from '../../shared/app.constants';
 
 export class UserData {

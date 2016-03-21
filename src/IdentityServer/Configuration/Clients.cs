@@ -7,36 +7,11 @@ namespace IdentityServer.Configuration
     {
         public static List<Client> Get()
         {
+            var httpAdress = "http://localhost:5000/";
+            var httpsAdress = "https://localhost:5000/";
+            
             return new List<Client>
             {
-                new Client
-                {
-                    ClientName = "angularclient",
-                    ClientId = "angularclient",
-                    Flow = Flows.Implicit,
-                    RedirectUris = new List<string>
-                    {
-                        "http://localhost:5000/authorized"
-                    },
-                    PostLogoutRedirectUris = new List<string>
-                    {
-                        "httts://localhost:44347/unauthorized.html"
-                    },
-                    AllowedCorsOrigins = new List<string>
-                    {
-                        "https://localhost:44347"
-                    },
-                    AllowedScopes = new List<string>
-                    {
-                        "openid",
-                        "email",
-                        "profile",
-                        "dataEventRecords",
-                        "aReallyCoolScope",
-                        "securedFiles",
-                        "role"
-                    }
-                },
                 new Client
                 {
                     ClientName = "angular2client",
@@ -44,23 +19,21 @@ namespace IdentityServer.Configuration
                     Flow = Flows.Implicit,
                     RedirectUris = new List<string>
                     {
-                        "http://localhost:5000/"
-
+                        httpAdress
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        "http://localhost:5000/Unauthorized.html"
+                        httpAdress + "Unauthorized.html"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        "https://localhost:5000/",
-                        "http://localhost:5000/"
+                        httpsAdress,
+                        httpAdress
                     },
                     AllowedScopes = new List<string>
                     {
                         "openid",
-                        "dataEventRecords",
-                        "securedFiles",
+                        "angular2Demo",
                         "role"
                     }
                 }

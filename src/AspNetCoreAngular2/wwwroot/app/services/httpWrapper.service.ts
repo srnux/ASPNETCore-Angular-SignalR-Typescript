@@ -2,11 +2,11 @@ import { Injectable } from 'angular2/core';
 import { Http, RequestOptionsArgs, Response, Headers } from 'angular2/http';
 import { Observable } from 'rxjs/Observable';
 import { CONFIGURATION } from '../shared/app.constants';
-import { TokenService } from '../services/TokenService';
+import { StorageService } from '../services/storage.service';
 
 @Injectable()
 export class HttpWrapperService {
-    constructor(private _http: Http, private _tokenService: TokenService) {
+    constructor(private _http: Http, private _storageService: StorageService) {
 
     }
 
@@ -47,7 +47,7 @@ export class HttpWrapperService {
     }
 
     private prepareOptions(options: RequestOptionsArgs): RequestOptionsArgs {
-        let token = this._tokenService.getToken();
+        let token: string = this._storageService.getItem('token');
 
         options = options || {};
 

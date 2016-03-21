@@ -13,55 +13,19 @@ namespace IdentityServer.Configuration
             {
                 new InMemoryUser
                 {
-                    Subject = "48421156",
-                    Username = "damienbod",
-                    Password = "damienbod",
-                    Claims = new Claim[]
-                    {
-                        new Claim(JwtClaimTypes.Name, "damienbod"),
-                        new Claim(JwtClaimTypes.GivenName, "damienbod"),
-                        new Claim(JwtClaimTypes.Email, "damien_bod@hotmail.com"),
-                        new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
-                        new Claim(JwtClaimTypes.Role, "guest"),
-                        new Claim(JwtClaimTypes.Role, "dataEventRecords")
-                    }
-                },
-                new InMemoryUser
-                {
                     Subject = "48421157",
-                    Username = "damienbodadmin",
-                    Password = "damienbod",
+                    Username = "admin",
+                    Password = "admin",
                     Claims = new Claim[]
                     {
-                        new Claim(JwtClaimTypes.Name, "damienbodadmin"),
-                        new Claim(JwtClaimTypes.GivenName, "damienbodadmin"),
-                        new Claim(JwtClaimTypes.Email, "damien_bod@hotmail.com"),
+                        new Claim(JwtClaimTypes.Name, "Fabian"),
+                        new Claim(JwtClaimTypes.GivenName, "Fabian"),
+                        new Claim(JwtClaimTypes.Email, "info@offering.solutions"),
                         new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
                         new Claim(JwtClaimTypes.Role, "admin"),
-                        new Claim(JwtClaimTypes.Role, "dataEventRecords.admin"),
-                        new Claim(JwtClaimTypes.Role, "dataEventRecords.user"),
-                        new Claim(JwtClaimTypes.Role, "dataEventRecords"),
-                        new Claim(JwtClaimTypes.Role, "securedFiles.user"),
-                        new Claim(JwtClaimTypes.Role, "securedFiles.admin"),
-                        new Claim(JwtClaimTypes.Role, "securedFiles")
-                    }
-                },
-                new InMemoryUser
-                {
-                    Subject = "48421158",
-                    Username = "damienboduser",
-                    Password = "damienbod",
-                    Claims = new Claim[]
-                    {
-                        new Claim(JwtClaimTypes.Name, "damienboduser"),
-                        new Claim(JwtClaimTypes.GivenName, "damienboduser"),
-                        new Claim(JwtClaimTypes.Email, "damien_bod@hotmail.com"),
-                        new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
-                        new Claim(JwtClaimTypes.Role, "user"),
-                        new Claim(JwtClaimTypes.Role, "dataEventRecords.user"),
-                        new Claim(JwtClaimTypes.Role, "dataEventRecords"),
-                        new Claim(JwtClaimTypes.Role, "securedFiles.user"),
-                        new Claim(JwtClaimTypes.Role, "securedFiles")
+                        new Claim(JwtClaimTypes.Role, "angular2Demo.admin"),
+                        new Claim(JwtClaimTypes.Role, "angular2Demo.user"),
+                        new Claim(JwtClaimTypes.Role, "angular2Demo")
                     }
                 }
             };

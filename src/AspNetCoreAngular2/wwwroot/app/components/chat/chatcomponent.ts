@@ -1,6 +1,6 @@
 import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
-import { SignalRService } from '../../services/signalRService';
+import { SignalRService } from '../../services/signalR.service';
 import { ChatMessage } from '../../models/ChatMessage';
 import { NeedsAuthentication } from '../../decorators/NeedsAuthentication';
 

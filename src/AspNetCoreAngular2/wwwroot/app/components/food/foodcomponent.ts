@@ -1,7 +1,7 @@
 import { Component, OnInit } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
-import { DataService } from '../../services/foodDataService';
-import { SignalRService } from '../../services/signalRService';
+import { DataService } from '../../services/food.dataService';
+import { SignalRService } from '../../services/signalR.service';
 import { FoodItem } from '../../models/FoodItem';
 import { NeedsAuthentication } from '../../decorators/NeedsAuthentication';
 

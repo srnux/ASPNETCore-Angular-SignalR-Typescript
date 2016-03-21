@@ -3,10 +3,11 @@ import {ComponentRef, provide, enableProdMode, bind} from 'angular2/core';
 import { APP_BASE_HREF, ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy } from 'angular2/router';
 import { HTTP_PROVIDERS } from 'angular2/http';
 import { AppComponent } from './app.component';
-import { SignalRService } from './services/signalRService';
-import { HttpWrapperService } from './services/HttpWrapperService';
-import { TokenService } from './services/TokenService';
-import { SecurityService } from './services/SecurityService';
+import { SignalRService } from './services/signalR.service';
+import { HttpWrapperService } from './services/httpWrapper.service';
+import { TokenService } from './services/token.service';
+import { StorageService } from './services/storage.service';
+import { SecurityService } from './services/security.service';
 import { appInjector } from './shared/app.injector';
 
 bootstrap(AppComponent, [
@@ -16,6 +17,7 @@ bootstrap(AppComponent, [
     HttpWrapperService,
     SecurityService,
     TokenService,
+    StorageService,
     // provide(LocationStrategy, {useClass: HashLocationStrategy})
     bind(LocationStrategy).toClass(HashLocationStrategy),
     provide(APP_BASE_HREF, { useValue: '/' })
