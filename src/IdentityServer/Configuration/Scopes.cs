@@ -23,7 +23,7 @@ namespace IdentityServer.Configuration
                     Type = ScopeType.Resource,
                     ScopeSecrets = new List<Secret>
                     {
-                        new Secret("angular2Demo".Sha256())
+                        new Secret("angular2DemoSecret".Sha256())
                     },
                     Claims = new List<ScopeClaim>
                     {

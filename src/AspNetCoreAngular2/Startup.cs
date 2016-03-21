@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using AspNetCoreAngular2.Hubs;
 using AspNetCoreAngular2.Models;
 using AspNetCoreAngular2.Repositories;
 using AspNetCoreAngular2.Services;
@@ -42,11 +43,9 @@ namespace AspNetCoreAngular2
             services.AddDataProtection();
             services.ConfigureDataProtection(configure =>
             {
-                configure.SetApplicationName("AspNet5IdentityServerAngularImplicitFlow");
+                configure.SetApplicationName("angular2Demo");
                 configure.ProtectKeysWithCertificate(cert);
             });
-
-            
 
             //Add Cors support to the service
             services.AddCors();
@@ -61,6 +60,19 @@ namespace AspNetCoreAngular2
             services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
 
             services.Configure<TimerServiceConfiguration>(Configuration.GetSection("TimeService"));
+
+            services.AddScoped<IFoodRepository, FoodRepository>();
+            services.AddSingleton<ITimerService, TimerService>();
+
+            services.AddSignalR(options =>
+            {
+                options.Hubs.EnableDetailedErrors = true;
+            });
+
+            Mapper.Initialize(mapper =>
+            {
+                mapper.CreateMap<FoodItem, FoodItemViewModel>().ReverseMap();
+            });
 
             var guestPolicy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
@@ -84,19 +96,6 @@ namespace AspNetCoreAngular2
             {
                 options.Filters.Add(new AuthorizeFilter(guestPolicy));
             });
-
-            services.AddSingleton<IFoodRepository, FoodRepository>();
-            services.AddSingleton<ITimerService, TimerService>();
-
-            services.AddSignalR(options =>
-            {
-                options.Hubs.EnableDetailedErrors = true;
-            });
-
-            Mapper.Initialize(mapper =>
-            {
-                mapper.CreateMap<FoodItem, FoodItemViewModel>().ReverseMap();
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -115,9 +114,9 @@ namespace AspNetCoreAngular2
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             app.UseIdentityServerAuthentication(options =>
             {
-                options.Authority = "https://localhost:44345/";
-                options.ScopeName = "dataEventRecords";
-                options.ScopeSecret = "dataEventRecordsSecret";
+                options.Authority = "https://localhost:44322/";
+                options.ScopeName = "angular2Demo";
+                options.ScopeSecret = "angular2DemoSecret";
 
                 options.AutomaticAuthenticate = true;
                 // required if you want to return a 403 and not a 401 for forbidden responses

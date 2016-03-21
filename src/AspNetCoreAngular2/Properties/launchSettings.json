@@ -21,7 +21,7 @@
             "Hosting:Environment": "Development"
         },
         "launchBrowser": true,
-        "launchUrl": "http://localhost:5000/index.html"
+        "launchUrl": "https://localhost:5000/index.html"
     }
   }
 }
