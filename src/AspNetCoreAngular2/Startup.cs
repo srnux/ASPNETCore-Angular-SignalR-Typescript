@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using AspNetCoreAngular2.Hubs;
 using AspNetCoreAngular2.Models;
+using AspNetCoreAngular2.Provider;
 using AspNetCoreAngular2.Repositories;
 using AspNetCoreAngular2.Services;
 using AspNetCoreAngular2.ViewModels;
@@ -43,8 +44,8 @@ namespace AspNetCoreAngular2
             services.AddDataProtection();
             services.ConfigureDataProtection(configure =>
             {
-                configure.SetApplicationName("angular2Demo");
-                configure.ProtectKeysWithCertificate(cert);
+               configure.SetApplicationName("angular2Demo");
+               configure.ProtectKeysWithCertificate(cert);
             });
 
             //Add Cors support to the service
@@ -75,27 +76,27 @@ namespace AspNetCoreAngular2
             });
 
             var guestPolicy = new AuthorizationPolicyBuilder()
-                .RequireAuthenticatedUser()
-                .RequireClaim("scope", "angular2Demo")
-                .Build();
+               .RequireAuthenticatedUser()
+               .RequireClaim("scope", "angular2Demo")
+               .Build();
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("angular2DemoAdmin", policyAdmin =>
-                {
-                    policyAdmin.RequireClaim("role", "angular2Demo.admin");
-                });
-                options.AddPolicy("angular2DemoUser", policyUser =>
-                {
-                    policyUser.RequireClaim("role", "angular2Demo.user");
-                });
-
+               options.AddPolicy("angular2DemoAdmin", policyAdmin =>
+               {
+                   policyAdmin.RequireClaim("role", "angular2Demo.admin");
+               });
+               options.AddPolicy("angular2DemoUser", policyUser =>
+               {
+                   policyUser.RequireClaim("role", "angular2Demo.user");
+               });
             });
 
             services.AddMvc(options =>
             {
-                options.Filters.Add(new AuthorizeFilter(guestPolicy));
+               options.Filters.Add(new AuthorizeFilter(guestPolicy));
             });
+            // services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,13 +115,13 @@ namespace AspNetCoreAngular2
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             app.UseIdentityServerAuthentication(options =>
             {
-                options.Authority = "https://localhost:44322/";
-                options.ScopeName = "angular2Demo";
-                options.ScopeSecret = "angular2DemoSecret";
+               options.Authority = "https://localhost:44322/";
+               options.ScopeName = "angular2Demo";
+               options.ScopeSecret = "angular2DemoSecret";
 
-                options.AutomaticAuthenticate = true;
-                // required if you want to return a 403 and not a 401 for forbidden responses
-                options.AutomaticChallenge = true;
+               options.AutomaticAuthenticate = true;
+               // required if you want to return a 403 and not a 401 for forbidden responses
+               options.AutomaticChallenge = true;
             });
 
             app.UseMvc();

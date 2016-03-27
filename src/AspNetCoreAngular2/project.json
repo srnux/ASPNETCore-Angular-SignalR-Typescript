@@ -17,7 +17,10 @@
         "Microsoft.AspNet.Identity": "3.0.0-rc1-final",
         "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
         "IdentityServer4.AccessTokenValidation": "1.0.0-beta3",
-        "Microsoft.AspNet.Authorization": "1.0.0-rc1-final"
+        "Microsoft.AspNet.Authorization": "1.0.0-rc1-final",
+        "AspNet.Security.OpenIdConnect.Extensions": "1.0.0-beta4",
+        "AspNet.Security.OpenIdConnect.Server": "1.0.0-beta4",
+        "Microsoft.AspNet.Authentication.OpenIdConnect": "1.0.0-rc1-final"
     },
 
   "commands": {
