@@ -1,6 +1,6 @@
 export let CONFIGURATION = {
     baseUrls: {
-        server: 'http://localhost:5000/',
+        server: 'https://localhost:5000/',
         apiUrl: 'api/',
         authorizationUrl: 'https://localhost:44338/connect/authorize'
     },
