@@ -11,6 +11,7 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Cors.Infrastructure;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Mvc.Filters;
+using Microsoft.AspNet.Server.Kestrel.Https;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -108,6 +109,10 @@ namespace AspNetCoreAngular2
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
+            var cert = new X509Certificate2(Path.Combine(_environment.ApplicationBasePath, "damienbodserver.pfx"), "");
+
+            app.UseKestrelHttps(new X509Certificate2(cert));
+ 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             app.UseIdentityServerAuthentication(options =>
             {
