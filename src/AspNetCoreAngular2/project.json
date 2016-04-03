@@ -24,9 +24,9 @@
         "Microsoft.AspNet.Authentication.OpenIdConnect": "1.0.0-rc1-final"
     },
 
-  "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel"
-  },
+    "commands": {
+        "web": "Microsoft.AspNet.Server.Kestrel --server.urls=https://*:5000/"
+    },
 
   "frameworks": {
     "dnx451": { }
