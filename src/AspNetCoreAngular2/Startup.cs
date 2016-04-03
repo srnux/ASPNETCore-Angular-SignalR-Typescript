@@ -88,11 +88,11 @@ namespace AspNetCoreAngular2
                });
             });
 
-            services.AddMvc(options =>
-            {
-               options.Filters.Add(new AuthorizeFilter(guestPolicy));
-            });
-            // services.AddMvc();
+            //services.AddMvc(options =>
+            //{
+            //   options.Filters.Add(new AuthorizeFilter(guestPolicy));
+            //});
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,7 +111,7 @@ namespace AspNetCoreAngular2
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             app.UseIdentityServerAuthentication(options =>
             {
-               options.Authority = "https://localhost:44322/";
+               options.Authority = "https://localhost:44338/";
                options.ScopeName = "angular2Demo";
                options.ScopeSecret = "angular2DemoSecret";
 

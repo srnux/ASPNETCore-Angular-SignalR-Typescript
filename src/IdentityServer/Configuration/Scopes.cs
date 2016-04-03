@@ -14,8 +14,6 @@ namespace IdentityServer.Configuration
                 StandardScopes.ProfileAlwaysInclude,
                 StandardScopes.EmailAlwaysInclude,
 
-                // API - access token will 
-                // contain roles of user
                 new Scope
                 {
                     Name = "angular2Demo",

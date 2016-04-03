@@ -7,7 +7,7 @@ namespace IdentityServer.Configuration
     {
         public static List<Client> Get()
         {
-            var httpsAddress = "https://localhost:5000/";
+            var httpsAddress = "https://localhost:5000";
             
             return new List<Client>
             {
@@ -22,7 +22,7 @@ namespace IdentityServer.Configuration
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        httpsAddress + "Unauthorized.html"
+                        httpsAddress + "/Unauthorized.html"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
