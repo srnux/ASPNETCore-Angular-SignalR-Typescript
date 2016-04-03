@@ -7,7 +7,7 @@ namespace IdentityServer.Configuration
     {
         public static List<Client> Get()
         {
-            var httpAdress = "http://localhost:5000/";
+           // var httpAdress = "http://localhost:5000/";
             var httpsAdress = "https://localhost:5000/";
             
             return new List<Client>
@@ -19,16 +19,15 @@ namespace IdentityServer.Configuration
                     Flow = Flows.Implicit,
                     RedirectUris = new List<string>
                     {
-                        httpAdress
+                        httpsAdress
                     },
                     PostLogoutRedirectUris = new List<string>
                     {
-                        httpAdress + "Unauthorized.html"
+                        httpsAdress + "Unauthorized.html"
                     },
                     AllowedCorsOrigins = new List<string>
                     {
-                        httpsAdress,
-                        httpAdress
+                        httpsAdress                      
                     },
                     AllowedScopes = new List<string>
                     {
