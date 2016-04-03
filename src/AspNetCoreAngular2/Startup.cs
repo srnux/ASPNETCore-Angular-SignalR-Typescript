@@ -9,6 +9,7 @@ using AutoMapper;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Cors.Infrastructure;
+using Microsoft.AspNet.DataProtection.Repositories;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Mvc.Filters;
 using Microsoft.AspNet.Server.Kestrel.Https;
@@ -76,6 +77,10 @@ namespace AspNetCoreAngular2
                .RequireAuthenticatedUser()
                .RequireClaim("scope", "angular2Demo")
                .Build();
+
+            DirectoryInfo directory = new DirectoryInfo(".");
+            var serviceDescriptor = new ServiceDescriptor(typeof(IXmlRepository), new FileSystemXmlRepository(directory));
+            services.Add(serviceDescriptor);
 
             services.AddAuthorization(options =>
             {
