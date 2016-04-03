@@ -89,11 +89,11 @@ namespace AspNetCoreAngular2
                });
             });
 
-            //services.AddMvc(options =>
-            //{
-            //   options.Filters.Add(new AuthorizeFilter(guestPolicy));
-            //});
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter(guestPolicy));
+            });
+            //services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
